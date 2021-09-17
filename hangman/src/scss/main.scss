@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Aller";
-  src: url(../fonts/AllerDisplay.ttf);
+  font-family: "AllerDisplay";
+  src: url("../fonts/AllerDisplay.ttf") format("truetype");
 }
 
 $white: #eeeeef;
@@ -9,16 +9,59 @@ $blue: #516af3;
 
 $bg: $white;
 $fg: $gray;
+$missedLettersColor: $blue;
+
+@mixin xs {
+  @media (min-width: 320px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin k {
+  @media (min-width: 3000px) {
+    @content;
+  }
+}
+
+* {
+  font-family: "AllerDisplay";
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 html,
 body {
   overflow: auto;
   width: 100vw;
   height: 100vh;
-  padding: 0;
-  margin: 0;
-  font-family: "Aller";
-  font-size: 36px;
+  font-size: 24px;
+
+  @include md {
+    font-size: 36px;
+  }
+
+  @include xl {
+    font-size: 48px;
+  }
 }
 main {
   width: 100%;
@@ -26,6 +69,11 @@ main {
   background-color: $bg;
   color: $fg;
   position: relative;
+  padding: 2rem;
+
+  display: grid;
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-template: "gallow" "missed" "word";
 }
 .rectangle {
   transform: rotate(45deg);
