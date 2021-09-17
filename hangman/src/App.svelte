@@ -4,11 +4,12 @@
   import Word from "./Word.svelte";
 
   let missedLetters: string[] = ["a", "B", "D", "E"];
+  let word: string = "ptyś";
 </script>
 
 <main>
   <MissedLetters {missedLetters} />
   <Gallow />
-  <Word />
+  <Word {word} />
   <div class="rectangle" />
 </main>
