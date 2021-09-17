@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Aller";
+  src: url(../fonts/AllerDisplay.ttf);
+}
+
+$white: #eeeeef;
+$gray: #56575f;
+$blue: #516af3;
+
+$bg: $white;
+$fg: $gray;
+
+html,
+body {
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Aller";
+  font-size: 36px;
+}
+main {
+  width: 100%;
+  height: 100%;
+  background-color: $bg;
+  color: $fg;
+  position: relative;
+}
+.rectangle {
+  transform: rotate(45deg);
+  position: fixed;
+  right: 0px;
+  bottom: -50vw;
+  width: 300px;
+  height: 100vw;
+  background-color: $blue;
+}
