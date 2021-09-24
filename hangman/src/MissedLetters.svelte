@@ -19,7 +19,6 @@
 
     &__caption {
       text-transform: uppercase;
-      font-size: 0.7rem;
     }
     &__letters {
       list-style: none;

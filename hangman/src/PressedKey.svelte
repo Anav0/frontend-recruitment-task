@@ -45,7 +45,11 @@
     font-size: 2rem;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%, -50%);
+
+    @include md {
+      top: 50%;
+    }
   }
 </style>

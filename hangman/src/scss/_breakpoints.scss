@@ -22,7 +22,7 @@
   }
 }
 
-@mixin k {
+@mixin ul {
   @media (min-width: 3000px) {
     @content;
   }
