@@ -14,6 +14,10 @@
 
   $: letters = word.toUpperCase().trim().split("");
 
+  $: {
+    if (missedLetters.length == 11) haveUserWon = false;
+  }
+
   onMount(fetchNewWord);
 
   function checkIfKeyMatched(key: string) {
@@ -41,7 +45,7 @@
 
 <main>
   <MissedLetters {missedLetters} />
-  <Gallow />
+  <Gallow numberOfMisses={missedLetters.length} />
   {#if haveUserWon === undefined}
     <PressedKey
       on:keyPressed={({ detail: key }) => {

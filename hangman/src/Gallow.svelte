@@ -1,9 +1,11 @@
 <script lang="ts">
   import { Piece } from "./piece";
 
+  export let numberOfMisses: number;
+
   const pieces: Piece[] = [];
 
-  const names: string[] = ["bar", "corpus", "head", "la", "lf", "lh", "ll", "neck", "ra", "rf", "rh", "rl"];
+  const names: string[] = ["bar", "head", "neck", "corpus", "ra", "la", "rh", "lh", "rl", "ll", "rf", "lf"];
 
   for (let i = 0; i < names.length; i++) {
     pieces.push(new Piece(names[i]));
@@ -11,8 +13,10 @@
 </script>
 
 <div class="gallow">
-  {#each pieces as piece}
-    <img class={`gallow__${piece.name}`} src={piece.path} />
+  {#each pieces as piece, i}
+    {#if i <= numberOfMisses}
+      <img class={`gallow__${piece.name}`} src={piece.path} />
+    {/if}
   {/each}
 </div>
 
