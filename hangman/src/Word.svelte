@@ -17,6 +17,7 @@
 
   .word {
     grid-area: word;
+    place-self: end center;
     z-index: 2;
 
     &__letters {
