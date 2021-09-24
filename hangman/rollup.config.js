@@ -7,6 +7,7 @@ import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
 import scss from "rollup-plugin-scss";
+import copy from "rollup-plugin-copy";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -66,7 +67,12 @@ export default {
       sourceMap: !production,
       inlineSources: !production,
     }),
-
+    copy({
+      targets: [
+        { src: ["src/fonts/**/*"], dest: "public/fonts" },
+        { src: "src/imgs/**/*", dest: "public/imgs" },
+      ],
+    }),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
     !production && serve(),
