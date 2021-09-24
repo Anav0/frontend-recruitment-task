@@ -1,13 +1,12 @@
 <script lang="ts">
-  export let word: string;
-
-  $: letters = word.trim().split("");
+  export let letters: string[];
+  export let uncover: number[];
 </script>
 
 <div class="word">
   <ul class="word__letters">
-    {#each letters as letter}
-      <li class="word__letter">{letter}</li>
+    {#each letters as letter, i}
+      <li class="word__letter" class:word__letter--uncover={uncover?.includes(i)}>{letter}</li>
     {/each}
   </ul>
 </div>
@@ -25,6 +24,14 @@
       list-style: none;
     }
     &__letter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+
+      &--uncover:after {
+        background-color: transparent !important;
+      }
       position: relative;
       background-color: $letterFoundBg;
       color: $letterFoundFg;

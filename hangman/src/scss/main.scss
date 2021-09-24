@@ -11,11 +11,14 @@ $lightBlue: #c9d0f6;
 
 $bg: $white;
 $fg: $gray;
+
 $missedLettersColor: $blue;
 
 $letterFoundBg: $gray;
 $letterFoundFg: $white;
 $letterCover: $gray;
+
+$pressedKeyColor: $blue;
 
 @mixin xs {
   @media (min-width: 320px) {
