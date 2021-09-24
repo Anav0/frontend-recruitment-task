@@ -4,6 +4,7 @@
 
   export let letters: string[];
   export let uncover: number[];
+  export let isGameOver: boolean;
 
   $: {
     if (uncover.length == letters.length) dispatch("gameWon");
@@ -13,7 +14,7 @@
 <div class="word">
   <ul class="word__letters">
     {#each letters as letter, i}
-      <li class="word__letter" class:word__letter--uncover={uncover?.includes(i)}>{letter}</li>
+      <li class="word__letter" class:word__letter--uncover={uncover?.includes(i) || isGameOver}>{letter}</li>
     {/each}
   </ul>
 </div>

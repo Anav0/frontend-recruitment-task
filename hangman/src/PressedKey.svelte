@@ -1,23 +1,38 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { fade, fly } from "svelte/transition";
 
   const dispatch = createEventDispatcher();
 
   let pressedKey = "";
   let isProcessing = false;
+  let isVisible = true;
 
   function handleKeydown(e) {
     if (isProcessing) return;
 
     if (e.code.includes("Key")) {
-      pressedKey = e.key.toUpperCase();
-      dispatch("keyPressed", pressedKey);
+      isVisible = false;
+      setTimeout(() => {
+        pressedKey = e.key.toUpperCase();
+        isVisible = true;
+        setTimeout(() => {
+          isVisible = false;
+          dispatch("keyPressed", pressedKey);
+        }, 800);
+      }, 200);
     }
   }
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
-<div class="key">{pressedKey == "" ? "Press key" : pressedKey}</div>
+<div>
+  {#if isVisible}
+    <div out:fly={{ y: -100, duration: 300 }} in:fly={{ y: 100, duration: 300 }} class="key">
+      {pressedKey == "" ? "Press key" : pressedKey}
+    </div>
+  {/if}
+</div>
 
 <style type="scss">
   @import "./scss/main";

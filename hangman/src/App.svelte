@@ -32,6 +32,7 @@
       uncover = [...uncover, ...indexes];
     }
   }
+
   async function fetchNewWord() {
     try {
       const response = await api.words.random();
@@ -53,7 +54,7 @@
       }}
     />
   {/if}
-  <Word on:gameWon={() => (haveUserWon = true)} {letters} {uncover} />
+  <Word isGameOver={haveUserWon == false} on:gameWon={() => (haveUserWon = true)} {letters} {uncover} />
   <div class="rectangle" />
   {#if errorMsg != ""}
     <h1 class="errorMsg">{errorMsg}</h1>

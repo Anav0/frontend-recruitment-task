@@ -1,0 +1,31 @@
+$white: #eeeeef;
+$gray: #56575f;
+$lightGray: #e6e7e7;
+$blue: #516af3;
+$lightBlue: #c9d0f6;
+$lightBlueGradient: rgba(0, 97, 194, 0.5);
+$lightRedGradient: rgba(194, 0, 0, 0.5);
+$darkRedGradient: rgba(177, 33, 33, 0.7);
+
+$bg: $white;
+$fg: $gray;
+
+$gameWonBg: $lightBlueGradient;
+$gameWonFg: $white;
+$gameOverBg: $lightRedGradient;
+
+$errorFg: $white;
+$errorBg: $darkRedGradient;
+
+$missedLettersColor: $blue;
+
+$letterFoundBg: $gray;
+$letterFoundFg: $white;
+$letterCover: $gray;
+
+$pressedKeyColor: $blue;
+
+$rectangleBg: $blue;
+
+$btnFg: orange;
+$btnBorder: orange;

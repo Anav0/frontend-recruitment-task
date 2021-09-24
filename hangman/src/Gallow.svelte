@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Piece } from "./piece";
+  import { fade, fly } from "svelte/transition";
 
   export let numberOfMisses: number;
 
   const pieces: Piece[] = [];
-
   const names: string[] = ["bar", "head", "neck", "corpus", "ra", "la", "rh", "lh", "rl", "ll", "rf", "lf"];
 
   for (let i = 0; i < names.length; i++) {
@@ -15,7 +15,7 @@
 <div class="gallow">
   {#each pieces as piece, i}
     {#if i <= numberOfMisses}
-      <img class={`gallow__${piece.name}`} src={piece.path} />
+      <img transition:fade class={`gallow__${piece.name}`} src={piece.path} />
     {/if}
   {/each}
 </div>
