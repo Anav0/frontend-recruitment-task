@@ -12,6 +12,7 @@
     if (isProcessing) return;
 
     if (e.code.includes("Key")) {
+      isProcessing = true;
       isVisible = false;
       setTimeout(() => {
         pressedKey = e.key.toUpperCase();
@@ -19,6 +20,7 @@
         setTimeout(() => {
           isVisible = false;
           dispatch("keyPressed", pressedKey);
+          isProcessing = false;
         }, 800);
       }, 200);
     }
