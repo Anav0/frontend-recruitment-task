@@ -4,14 +4,17 @@
   import Word from "./Word.svelte";
   import PressedKey from "./PressedKey.svelte";
   import { onMount } from "svelte";
+  import api from "./api";
 
   let missedLetters: string[] = [];
   let uncover: number[] = [];
-  let word: string = "igorigor";
-  let haveUserWon: boolean = true;
+  let word: string = "";
+  let haveUserWon: boolean = undefined;
+  let errorMsg: string = "";
+
   $: letters = word.toUpperCase().trim().split("");
 
-  onMount(() => {});
+  onMount(fetchNewWord);
 
   function checkIfKeyMatched(key: string) {
     if (haveUserWon) return;
@@ -23,6 +26,15 @@
       missedLetters = [...missedLetters];
     } else if (!uncover.includes(indexes[0])) {
       uncover = [...uncover, ...indexes];
+    }
+  }
+  async function fetchNewWord() {
+    try {
+      const response = await api.words.random();
+      const words = await response.json();
+      word = words[0];
+    } catch (error) {
+      errorMsg = error.message;
     }
   }
 </script>
@@ -39,14 +51,17 @@
   {/if}
   <Word on:gameWon={() => (haveUserWon = true)} {letters} {uncover} />
   <div class="rectangle" />
-  {#if haveUserWon != undefined}
+  {#if errorMsg != ""}
+    <h1 class="errorMsg">{errorMsg}</h1>
+  {/if}
+  {#if haveUserWon != undefined && errorMsg === ""}
     <div class="gameWon" class:gameWon--won={haveUserWon} class:gameWon--over={!haveUserWon}>
       <h1 class="gameWon__header">GAME {haveUserWon ? "WON" : "OVER"}</h1>
       <button
-        on:click={() => {
+        on:click={async () => {
           missedLetters = [];
           uncover = [];
-          word = "Jacuś";
+          await fetchNewWord();
           haveUserWon = undefined;
         }}
         class="gameWon__btn">NEW WORD</button
