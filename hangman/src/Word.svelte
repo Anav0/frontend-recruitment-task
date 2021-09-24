@@ -1,6 +1,13 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
   export let letters: string[];
   export let uncover: number[];
+
+  $: {
+    if (uncover.length == letters.length) dispatch("gameWon");
+  }
 </script>
 
 <div class="word">

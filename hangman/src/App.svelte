@@ -6,15 +6,16 @@
   import { onMount } from "svelte";
 
   let missedLetters: string[] = [];
-  let uncover: number[];
+  let uncover: number[] = [];
   let word: string = "igorigor";
+  let haveUserWon: boolean = true;
   $: letters = word.toUpperCase().trim().split("");
 
-  onMount(() => {
-    uncover = new Array(letters.length);
-  });
+  onMount(() => {});
 
   function checkIfKeyMatched(key: string) {
+    if (haveUserWon) return;
+
     let indexes = letters.map((_, i) => i).filter((i) => letters[i] == key);
 
     if (indexes.length === 0 && !missedLetters.includes(key)) {
@@ -29,11 +30,27 @@
 <main>
   <MissedLetters {missedLetters} />
   <Gallow />
-  <PressedKey
-    on:keyPressed={({ detail: key }) => {
-      checkIfKeyMatched(key);
-    }}
-  />
-  <Word {letters} {uncover} />
+  {#if haveUserWon === undefined}
+    <PressedKey
+      on:keyPressed={({ detail: key }) => {
+        checkIfKeyMatched(key);
+      }}
+    />
+  {/if}
+  <Word on:gameWon={() => (haveUserWon = true)} {letters} {uncover} />
   <div class="rectangle" />
+  {#if haveUserWon != undefined}
+    <div class="gameWon" class:gameWon--won={haveUserWon} class:gameWon--over={!haveUserWon}>
+      <h1 class="gameWon__header">GAME {haveUserWon ? "WON" : "OVER"}</h1>
+      <button
+        on:click={() => {
+          missedLetters = [];
+          uncover = [];
+          word = "Jacuś";
+          haveUserWon = undefined;
+        }}
+        class="gameWon__btn">NEW WORD</button
+      >
+    </div>
+  {/if}
 </main>

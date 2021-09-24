@@ -109,3 +109,41 @@ main {
     right: 0;
   }
 }
+
+.gameWon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 97, 194, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+
+  &--over {
+    background-color: rgba(194, 0, 0, 0.5);
+  }
+  &--won {
+    background-color: rgba(0, 97, 194, 0.5);
+  }
+
+  &__header {
+    color: white;
+  }
+  &__btn {
+    margin-top: 1rem;
+    background: transparent;
+    padding: 0.7rem 2rem;
+    border: 2px dashed orange;
+    border-radius: 55px;
+    color: orange;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
